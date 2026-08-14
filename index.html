@@ -4,802 +4,777 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A Little Birthday Surprise 🎁</title>
+<title>A Little Something</title>
 
 <style>
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Georgia, "Times New Roman", serif;
-  color: white;
-  text-align: center;
-  background:
-    radial-gradient(circle at top, #3d2945 0%, #18121d 55%, #09070d 100%);
-  overflow-x: hidden;
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, #33243b, #17121c 55%, #09070d);
+    color: #fff;
+    font-family: Georgia, "Times New Roman", serif;
+    overflow-x: hidden;
 }
 
-/* ---------- FLOATING STARS ---------- */
+/* ---------------- STARS ---------------- */
 
 .star {
-  position: fixed;
-  color: white;
-  opacity: 0.5;
-  pointer-events: none;
-  animation: twinkle 3s infinite ease-in-out;
-  z-index: 0;
+    position: fixed;
+    color: white;
+    opacity: 0.45;
+    pointer-events: none;
+    animation: twinkle 3s infinite ease-in-out;
+    z-index: 1;
 }
 
 @keyframes twinkle {
-  0%,100% {
-    opacity: 0.2;
-    transform: scale(0.8);
-  }
 
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 0.9;
+        transform: scale(1.2);
+    }
 }
 
-/* ---------- FLYING HEARTS ---------- */
+
+/* ---------------- FLYING HEARTS ---------------- */
 
 .heart {
-  position: fixed;
-  bottom: -40px;
-  font-size: 18px;
-  pointer-events: none;
-  animation: flyHeart 5s linear forwards;
-  z-index: 5;
-  opacity: 0.8;
+    position: fixed;
+    bottom: -30px;
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0;
+    animation: floatHeart 6s linear forwards;
 }
 
-@keyframes flyHeart {
-  0% {
-    transform: translateY(0) scale(0.7) rotate(0deg);
-    opacity: 0;
-  }
+@keyframes floatHeart {
 
-  15% {
-    opacity: 0.8;
-  }
+    0% {
+        transform: translateY(0) translateX(0) scale(0.6);
+        opacity: 0;
+    }
 
-  100% {
-    transform: translateY(-110vh) scale(1.2) rotate(25deg);
-    opacity: 0;
-  }
+    15% {
+        opacity: 0.65;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            translateX(35px)
+            scale(1.1);
+        opacity: 0;
+    }
 }
 
-/* ---------- PAGE ---------- */
 
-.page {
-  position: relative;
-  z-index: 2;
-  max-width: 650px;
-  margin: auto;
-  padding: 45px 22px;
+/* ---------------- MAIN ---------------- */
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
+    padding: 30px 20px;
+    position: relative;
+    z-index: 5;
 }
 
 .screen {
-  display: none;
-  min-height: 88vh;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  animation: appear 0.8s ease;
+    display: none;
+    min-height: 92vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    animation: fadeIn 0.9s ease;
 }
 
 .screen.active {
-  display: flex;
+    display: flex;
 }
 
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
+@keyframes fadeIn {
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.tiny {
-  font-size: 12px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  opacity: 0.6;
+.small-title {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.55;
 }
 
 h1 {
-  font-size: clamp(55px, 15vw, 90px);
-  font-weight: normal;
-  margin: 18px 0 5px;
+    font-size: 70px;
+    font-weight: normal;
+    margin: 20px 0 5px;
 }
 
 h2 {
-  font-size: 29px;
-  font-weight: normal;
+    font-size: 28px;
+    font-weight: normal;
+    margin: 18px 0;
 }
 
-.subtitle {
-  font-size: 17px;
-  line-height: 1.8;
-  opacity: 0.8;
+p {
+    line-height: 1.8;
 }
 
-.message {
-  font-size: 17px;
-  line-height: 1.9;
-  color: #f8eaf0;
+.soft {
+    opacity: 0.72;
+    font-size: 16px;
 }
 
-/* ---------- CARD ---------- */
+
+/* ---------------- CARD ---------------- */
 
 .card {
-  width: 100%;
-  padding: 32px 24px;
-  border-radius: 25px;
+    width: 100%;
+    padding: 30px 23px;
 
-  background: rgba(255,255,255,0.07);
+    border-radius: 25px;
 
-  border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.065);
 
-  box-shadow:
-    0 20px 60px rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.13);
 
-  backdrop-filter: blur(10px);
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.4);
+
+    backdrop-filter: blur(12px);
 }
 
-/* ---------- GIFT ---------- */
+
+/* ---------------- GIFT ---------------- */
+
+.gift-area {
+    margin-top: 35px;
+}
 
 .gift {
-  position: relative;
-  width: 160px;
-  height: 145px;
-  margin: 35px auto 10px;
-  cursor: pointer;
-  animation: bounce 2s infinite ease-in-out;
+    width: 160px;
+    height: 145px;
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    animation: giftFloat 2s infinite ease-in-out;
 }
 
-@keyframes bounce {
-  0%,100% {
-    transform: translateY(0);
-  }
+@keyframes giftFloat {
 
-  50% {
-    transform: translateY(-10px);
-  }
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-9px);
+    }
 }
 
-.gift-box {
-  position: absolute;
-  width: 125px;
-  height: 90px;
-  background: #c98eaa;
-  left: 18px;
-  bottom: 0;
-  border-radius: 6px;
+.box {
+    position: absolute;
+    width: 125px;
+    height: 88px;
+    left: 18px;
+    bottom: 0;
+    background: #b97e9b;
+    border-radius: 5px;
 }
 
-.gift-lid {
-  position: absolute;
-  width: 140px;
-  height: 27px;
-  background: #e5b2ca;
-  left: 10px;
-  top: 28px;
-  border-radius: 6px;
-  transition: 0.7s;
+.lid {
+    position: absolute;
+    width: 140px;
+    height: 27px;
+    left: 10px;
+    top: 28px;
+    background: #e0acc4;
+    border-radius: 6px;
+    transition: 0.8s;
 }
 
-.ribbon-v {
-  position: absolute;
-  width: 18px;
-  height: 90px;
-  background: #f8dce9;
-  left: 54px;
-  bottom: 0;
+.ribbonVertical {
+    position: absolute;
+    width: 17px;
+    height: 88px;
+    left: 54px;
+    bottom: 0;
+    background: #f6dce8;
 }
 
-.ribbon-h {
-  position: absolute;
-  width: 140px;
-  height: 12px;
-  background: #f8dce9;
-  left: 10px;
-  top: 36px;
+.ribbonHorizontal {
+    position: absolute;
+    width: 140px;
+    height: 11px;
+    left: 10px;
+    top: 36px;
+    background: #f6dce8;
 }
 
 .bow {
-  position: absolute;
-  width: 42px;
-  height: 26px;
-  border: 7px solid #f8dce9;
-  border-radius: 50%;
-  top: 3px;
-  left: 38px;
-  transform: rotate(-20deg);
+    position: absolute;
+    width: 43px;
+    height: 26px;
+    left: 37px;
+    top: 3px;
+    border: 7px solid #f6dce8;
+    border-radius: 50%;
+    transform: rotate(-20deg);
 }
 
 .bow.right {
-  left: 75px;
-  transform: rotate(20deg);
+    left: 76px;
+    transform: rotate(20deg);
 }
 
-.gift.opened .gift-lid {
-  transform: translateY(-65px) rotate(-8deg);
-  opacity: 0;
+.gift.open .lid {
+    transform:
+        translateY(-70px)
+        rotate(-10deg);
+    opacity: 0;
 }
 
-/* ---------- BUTTONS ---------- */
+
+/* ---------------- BUTTON ---------------- */
 
 button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
 }
 
-.open-btn,
-.next-btn,
-.music-btn {
-  margin-top: 28px;
-  padding: 13px 28px;
-  border-radius: 30px;
-  background: #f4d8e6;
-  color: #251521;
-  font-size: 15px;
-  transition: 0.3s;
+.next {
+    margin-top: 28px;
+    padding: 13px 28px;
+    border-radius: 30px;
+
+    background: #f2d7e4;
+    color: #24151f;
+
+    font-size: 15px;
+
+    transition: 0.3s;
 }
 
-.open-btn:hover,
-.next-btn:hover,
-.music-btn:hover {
-  transform: scale(1.06);
+.next:hover {
+    transform: scale(1.06);
 }
 
-/* ---------- PHOTOS ---------- */
+
+/* ---------------- PHOTOS ---------------- */
+
+.photo-frame {
+    margin-top: 20px;
+    padding: 9px;
+
+    background: rgba(255,255,255,0.12);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,0.4);
+}
 
 .photo {
-  width: 100%;
-  max-height: 430px;
-  object-fit: cover;
-  border-radius: 20px;
-  margin: 20px 0 10px;
+    display: block;
 
-  box-shadow:
-    0 15px 40px rgba(0,0,0,0.35);
+    width: 100%;
+    max-height: 430px;
 
-  animation: photoAppear 1s ease;
+    object-fit: contain;
+
+    border-radius: 14px;
 }
 
-@keyframes photoAppear {
-  from {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.photo-caption {
+    margin-top: 22px;
+    font-size: 16px;
+    opacity: 0.78;
 }
 
-/* ---------- FINAL ---------- */
 
-.mystery {
-  font-size: 45px;
+/* ---------------- END ---------------- */
+
+.final-symbol {
+    font-size: 38px;
+    margin: 20px 0;
+    opacity: 0.75;
 }
 
-.final-heart {
-  font-size: 35px;
-  margin-top: 25px;
-  opacity: 0.8;
+.signature {
+    margin-top: 25px;
+    opacity: 0.55;
+    font-size: 14px;
 }
 
-.small-note {
-  font-size: 13px;
-  opacity: 0.55;
-  margin-top: 15px;
-}
 </style>
 </head>
 
 
 <body>
 
-<!-- STARS -->
+
+<!-- BACKGROUND STARS -->
 
 <span class="star" style="left:8%;top:12%;">✦</span>
-<span class="star" style="left:85%;top:15%;">✧</span>
-<span class="star" style="left:20%;top:75%;">✦</span>
+<span class="star" style="left:85%;top:16%;">✧</span>
+<span class="star" style="left:20%;top:70%;">✦</span>
 <span class="star" style="left:90%;top:65%;">✧</span>
-<span class="star" style="left:55%;top:25%;">✦</span>
-<span class="star" style="left:70%;top:82%;">✧</span>
+<span class="star" style="left:55%;top:24%;">✦</span>
+<span class="star" style="left:72%;top:82%;">✧</span>
 
 
-<main class="page">
+<div class="container">
 
 
-<!-- SCREEN 1 : OPENING -->
+<!-- ================= SCREEN 1 ================= -->
 
 <section class="screen active" id="screen1">
 
-<div class="tiny">
-A little something for you
-</div>
+    <div class="small-title">
+        something small
+    </div>
 
-<h1>21</h1>
+    <h1>21</h1>
 
-<p class="subtitle">
-There's a little birthday surprise waiting here.
-<br>
-Don't overthink it. Just open it. 🎁
-</p>
-
-
-<div class="gift" id="gift" onclick="openGift()">
-
-<div class="bow"></div>
-<div class="bow right"></div>
-
-<div class="gift-lid"></div>
-
-<div class="gift-box">
-<div class="ribbon-v"></div>
-</div>
-
-<div class="ribbon-h"></div>
-
-</div>
+    <p class="soft">
+        There's something waiting inside.
+        <br>
+        Open it when you're ready.
+    </p>
 
 
-<button class="open-btn" onclick="openGift()">
-Open the gift 🎁
-</button>
+    <div class="gift-area">
+
+        <div class="gift" id="gift" onclick="openGift()">
+
+            <div class="bow"></div>
+
+            <div class="bow right"></div>
+
+            <div class="lid"></div>
+
+            <div class="box">
+
+                <div class="ribbonVertical"></div>
+
+            </div>
+
+            <div class="ribbonHorizontal"></div>
+
+        </div>
+
+    </div>
+
+
+    <button class="next" onclick="openGift()">
+        Open the gift 🎁
+    </button>
 
 </section>
 
 
 
-<!-- SCREEN 2 : BIRTHDAY -->
+<!-- ================= SCREEN 2 ================= -->
 
 <section class="screen" id="screen2">
 
-<div class="card">
+    <div class="card">
 
-<div class="tiny">
-First little note
-</div>
+        <div class="small-title">
+            before we continue
+        </div>
 
-<h2>
-Happy 21st Birthday, Akkshay! 🎂
-</h2>
+        <h2>
+            Nothing complicated.
+        </h2>
 
-<div class="message">
+        <p class="soft">
+            Just a few things that made
+            their way into this little surprise.
+        </p>
 
-<p>
-You made it to 21. :)
-</p>
+        <p class="soft">
+            That's it. :)
+        </p>
 
-<p>
-I hope this year brings you plenty of
-good moments, good people,
-and memories worth keeping.
-</p>
-
-<p>
-Have a really wonderful birthday.
-✨
-</p>
-
-</div>
-
-</div>
+    </div>
 
 
-<button class="next-btn" onclick="nextScreen(3)">
-Open the next one →
-</button>
+    <button class="next" onclick="nextScreen(3)">
+        Continue →
+    </button>
 
 </section>
 
 
 
-<!-- SCREEN 3 : PHOTO 1 -->
+<!-- ================= PHOTO 1 ================= -->
 
 <section class="screen" id="screen3">
 
-<div class="card">
+    <div class="card">
 
-<div class="tiny">
-A little memory
-</div>
-
-<img
-src="Snapchat-1456545909.jpg"
-class="photo"
-alt="A memory">
-
-<h2>
-A moment worth keeping ✨
-</h2>
-
-<div class="message">
-
-<p>
-Some moments are simple,
-but they still become memories.
-</p>
-
-</div>
-
-</div>
+        <div class="small-title">
+            from the archives
+        </div>
 
 
-<button class="next-btn" onclick="nextScreen(4)">
-Next memory →
-</button>
+        <div class="photo-frame">
+
+            <img
+                src="Snapchat-949431494.jpg"
+                class="photo"
+                alt="Memory">
+
+        </div>
+
+
+        <p class="photo-caption">
+            The tiny human era.
+        </p>
+
+    </div>
+
+
+    <button class="next" onclick="nextScreen(4)">
+        Another one →
+    </button>
 
 </section>
 
 
 
-<!-- SCREEN 4 : PHOTO 2 -->
+<!-- ================= PHOTO 2 ================= -->
 
 <section class="screen" id="screen4">
 
-<div class="card">
+    <div class="card">
 
-<div class="tiny">
-Another little memory
-</div>
-
-<img
-src="Snapchat-674437124.jpg"
-class="photo"
-alt="A memory">
-
-<div class="message">
-
-<p>
-Here's another one
-for your little birthday collection. :)
-</p>
-
-</div>
-
-</div>
+        <div class="small-title">
+            another page
+        </div>
 
 
-<button class="next-btn" onclick="nextScreen(5)">
-One more →
-</button>
+        <div class="photo-frame">
+
+            <img
+                src="Snapchat-1400773371(1).jpg"
+                class="photo"
+                alt="Memory">
+
+        </div>
+
+
+        <p class="photo-caption">
+            Okay... this one had to be included too. 😂
+        </p>
+
+    </div>
+
+
+    <button class="next" onclick="nextScreen(5)">
+        Keep going →
+    </button>
 
 </section>
 
 
 
-<!-- SCREEN 5 : PHOTO 3 -->
+<!-- ================= PHOTO 3 ================= -->
 
 <section class="screen" id="screen5">
 
-<div class="card">
+    <div class="card">
 
-<div class="tiny">
-One last memory
-</div>
-
-<img
-src="Snapchat-941585431.jpg"
-class="photo"
-alt="A memory">
-
-<div class="message">
-
-<p>
-And one more,
-because one wasn't enough. ✨
-</p>
-
-</div>
-
-</div>
+        <div class="small-title">
+            somewhere along the way
+        </div>
 
 
-<button class="next-btn" onclick="nextScreen(6)">
-Continue →
-</button>
+        <div class="photo-frame">
+
+            <img
+                src="Snapchat-1031815939(1).jpg"
+                class="photo"
+                alt="Memory">
+
+        </div>
+
+
+        <p class="photo-caption">
+            And then... this era.
+        </p>
+
+    </div>
+
+
+    <button class="next" onclick="nextScreen(6)">
+        One more →
+    </button>
 
 </section>
 
 
 
-<!-- SCREEN 6 : WISH -->
+<!-- ================= PHOTO 4 ================= -->
 
 <section class="screen" id="screen6">
 
-<div class="card">
+    <div class="card">
 
-<div class="tiny">
-A little wish
-</div>
-
-<h2>
-For this new chapter ✨
-</h2>
-
-<div class="message">
-
-<p>
-I hope 21 is kind to you.
-</p>
-
-<p>
-More reasons to smile,
-more unexpected good days,
-and lots of moments
-you'll look back on happily.
-</p>
-
-<p>
-That's all this little gift is meant to say.
-</p>
-
-</div>
-
-</div>
+        <div class="small-title">
+            and here we are
+        </div>
 
 
-<button class="next-btn" onclick="nextScreen(7)">
-One last thing →
-</button>
+        <div class="photo-frame">
+
+            <img
+                src="Snapchat-772237693.jpg"
+                class="photo"
+                alt="Memory">
+
+        </div>
+
+
+        <p class="photo-caption">
+            Somehow, 21 already.
+        </p>
+
+    </div>
+
+
+    <button class="next" onclick="nextScreen(7)">
+        One last thing →
+    </button>
 
 </section>
 
 
 
-<!-- SCREEN 7 : ANONYMOUS -->
+<!-- ================= FINAL ================= -->
 
 <section class="screen" id="screen7">
 
-<div class="card">
+    <div class="card">
 
-<div class="mystery">
-👀
-</div>
-
-<div class="tiny">
-One question
-</div>
-
-<h2>
-Who's this from?
-</h2>
-
-<div class="message">
-
-<p>
-Hmm...
-</p>
-
-<p>
-Let's leave that part
-as a mystery for now. :)
-</p>
-
-<p>
-No clues. No guessing.
-<br>
-Just take the birthday wish.
-</p>
-
-</div>
-
-</div>
+        <div class="small-title">
+            that's all
+        </div>
 
 
-<button class="next-btn" onclick="nextScreen(9)">
-There's something to listen to 🎵
-</button>
+        <h2>
+            Hope this made you smile. :)
+        </h2>
+
+
+        <p class="soft">
+            No big explanation.
+            <br>
+            No hidden assignment.
+            <br>
+            Just a tiny little surprise.
+        </p>
+
+
+        <div class="final-symbol">
+            ♡
+        </div>
+
+
+        <div class="signature">
+            — Anonymous
+        </div>
+
+    </div>
 
 </section>
 
 
-
-<!-- SCREEN 8 : MUSIC -->
-
-
-
-
-
-
-
-
-
-<!-- SCREEN 9 : END -->
-
-<section class="screen" id="screen9">
-
-<div class="card">
-
-<div class="tiny">
-That's all
 </div>
 
-<h2>
-Happy 21st once again 🤍
-</h2>
-
-<div class="message">
-
-<p>
-No expectations.
-</p>
-
-<p>
-No need to figure anything out.
-</p>
-
-<p>
-Just a small birthday surprise
-from someone who wishes you well.
-</p>
-
-</div>
-
-<div class="final-heart">
-♡
-</div>
-
-<p class="small-note">
-— Anonymous
-</p>
-
-</div>
-
-</section>
 
 
-</main>
+<!-- ================= MUSIC ================= -->
 
+<audio id="backgroundMusic">
 
-  <audio id="song">
-
-<source
-src="Taylor Swift - Enchanted.mp3"
-type="audio/mpeg">
+    <source
+        src="Taylor Swift - Enchanted.mp3"
+        type="audio/mpeg">
 
 </audio>
+
+
+
 <script>
 
-/* ---------- GIFT ---------- */
+
+/* ================= GIFT ================= */
 
 function openGift() {
 
-const gift = document.getElementById("gift");
+    const gift =
+        document.getElementById("gift");
 
-gift.classList.add("opened");
-const song = document.getElementById("song");
-song.play();
+    gift.classList.add("open");
 
-startHearts();
 
-setTimeout(function() {
-nextScreen(2);
-}, 700);
+    /*
+       Start the song at 1:49.
+
+       1 minute 49 seconds
+       = 109 seconds.
+    */
+
+    const music =
+        document.getElementById("backgroundMusic");
+
+    music.currentTime = 109;
+
+    music.play().catch(function(error) {
+        console.log("Music needs user interaction.");
+    });
+
+
+    createHearts();
+
+
+    setTimeout(function() {
+
+        nextScreen(2);
+
+    }, 800);
 
 }
 
 
 
-/* ---------- SCREEN CHANGES ---------- */
+/* ================= SCREEN CHANGE ================= */
 
 function nextScreen(number) {
 
-const screens = document.querySelectorAll(".screen");
-
-screens.forEach(function(screen) {
-screen.classList.remove("active");
-});
-
-document
-.getElementById("screen" + number)
-.classList.add("active");
-
-window.scrollTo({
-top: 0,
-behavior: "smooth"
-});
-
-startHearts();
-
-}
+    const screens =
+        document.querySelectorAll(".screen");
 
 
+    screens.forEach(function(screen) {
 
-/* ---------- FLYING HEARTS ---------- */
+        screen.classList.remove("active");
 
-function startHearts() {
+    });
 
-for (let i = 0; i < 7; i++) {
 
-setTimeout(function() {
+    const next =
+        document.getElementById("screen" + number);
 
-const heart = document.createElement("div");
 
-heart.className = "heart";
+    next.classList.add("active");
 
-heart.innerHTML =
-["♡","♥","♡","♥"][Math.floor(Math.random() * 4)];
 
-heart.style.left =
-Math.random() * 100 + "vw";
+    window.scrollTo({
 
-heart.style.animationDuration =
-(4 + Math.random() * 3) + "s";
+        top: 0,
 
-heart.style.fontSize =
-(14 + Math.random() * 12) + "px";
+        behavior: "smooth"
 
-document.body.appendChild(heart);
+    });
 
-setTimeout(function() {
-heart.remove();
-}, 7000);
 
-}, i * 180);
-
-}
+    createHearts();
 
 }
 
 
 
-/* ---------- MUSIC ---------- */
+/* ================= HEARTS ================= */
 
-function toggleMusic() {
+function createHearts() {
 
-const song = document.getElementById("song");
+    const symbols = [
+        "♡",
+        "♡",
+        "♥",
+        "✦"
+    ];
 
-const button =
-document.querySelector(".music-btn");
+
+    for (let i = 0; i < 6; i++) {
+
+        setTimeout(function() {
+
+            const heart =
+                document.createElement("div");
 
 
-if (song.paused) {
+            heart.className = "heart";
 
-/*
-109 seconds = 1 minute 49 seconds
-*/
 
-song.currentTime = 109;
+            heart.innerHTML =
+                symbols[
+                    Math.floor(
+                        Math.random() *
+                        symbols.length
+                    )
+                ];
 
-song.play();
 
-button.innerHTML = "⏸ Pause";
+            heart.style.left =
+                Math.random() * 100 + "vw";
 
-} else {
 
-song.pause();
+            heart.style.fontSize =
+                (14 + Math.random() * 10) + "px";
 
-button.innerHTML = "▶ Play";
 
-}
+            heart.style.animationDuration =
+                (4 + Math.random() * 3) + "s";
+
+
+            document.body.appendChild(heart);
+
+
+            setTimeout(function() {
+
+                heart.remove();
+
+            }, 7000);
+
+
+        }, i * 180);
+
+    }
 
 }
 
 </script>
 
 </body>
-  </html>
-
-    
-      
-  
+</html>        
 
 
-                                            
+
+
+
+
+
