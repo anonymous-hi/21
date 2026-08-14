@@ -1,564 +1,835 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>A Little Birthday Surprise 🎁</title>
+<title>A Little Birthday Surprise 🎁</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
-      background:
-        radial-gradient(circle at top, #35213d 0%, #17121d 45%, #0b0910 100%);
-      color: #fff;
-      text-align: center;
-      overflow-x: hidden;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, "Times New Roman", serif;
+  color: white;
+  text-align: center;
+  background:
+    radial-gradient(circle at top, #3d2945 0%, #18121d 55%, #09070d 100%);
+  overflow-x: hidden;
+}
 
-    /* Floating stars */
-    .star {
-      position: fixed;
-      color: #fff;
-      opacity: 0.6;
-      pointer-events: none;
-      animation: twinkle 3s infinite ease-in-out;
-      z-index: 0;
-    }
+/* ---------- FLOATING STARS ---------- */
 
-    @keyframes twinkle {
-      0%, 100% {
-        opacity: 0.2;
-        transform: scale(0.8);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.2);
-      }
-    }
+.star {
+  position: fixed;
+  color: white;
+  opacity: 0.5;
+  pointer-events: none;
+  animation: twinkle 3s infinite ease-in-out;
+  z-index: 0;
+}
 
-    .page {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 650px;
-      margin: auto;
-      padding: 60px 22px;
-    }
+@keyframes twinkle {
+  0%,100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
 
-    .screen {
-      display: none;
-      min-height: 75vh;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      animation: fadeIn 0.8s ease;
-    }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
 
-    .screen.active {
-      display: flex;
-    }
+/* ---------- FLYING HEARTS ---------- */
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
+.heart {
+  position: fixed;
+  bottom: -40px;
+  font-size: 18px;
+  pointer-events: none;
+  animation: flyHeart 5s linear forwards;
+  z-index: 5;
+  opacity: 0.8;
+}
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+@keyframes flyHeart {
+  0% {
+    transform: translateY(0) scale(0.7) rotate(0deg);
+    opacity: 0;
+  }
 
-    .tiny {
-      font-size: 12px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      opacity: 0.6;
-    }
+  15% {
+    opacity: 0.8;
+  }
 
-    h1 {
-      font-size: clamp(42px, 12vw, 75px);
-      font-weight: normal;
-      margin: 20px 0 5px;
-    }
+  100% {
+    transform: translateY(-110vh) scale(1.2) rotate(25deg);
+    opacity: 0;
+  }
+}
 
-    h2 {
-      font-size: 30px;
-      font-weight: normal;
-    }
+/* ---------- PAGE ---------- */
 
-    .subtitle {
-      font-size: 17px;
-      line-height: 1.8;
-      opacity: 0.8;
-      max-width: 480px;
-    }
+.page {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+  margin: auto;
+  padding: 45px 22px;
+}
 
-    /* Buttons */
+.screen {
+  display: none;
+  min-height: 88vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: appear 0.8s ease;
+}
 
-    button {
-      font-family: inherit;
-      cursor: pointer;
-      border: none;
-    }
+.screen.active {
+  display: flex;
+}
 
-    .open-btn,
-    .next-btn,
-    .music-btn {
-      margin-top: 30px;
-      padding: 13px 28px;
-      border-radius: 30px;
-      background: #f3d6e4;
-      color: #241522;
-      font-size: 15px;
-      transition: 0.3s;
-    }
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-    .open-btn:hover,
-    .next-btn:hover,
-    .music-btn:hover {
-      transform: scale(1.06);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    /* Gift */
+.tiny {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
 
-    .gift {
-      position: relative;
-      width: 150px;
-      height: 130px;
-      margin: 35px auto 10px;
-      cursor: pointer;
-      animation: bounce 2s infinite ease-in-out;
-    }
+h1 {
+  font-size: clamp(55px, 15vw, 90px);
+  font-weight: normal;
+  margin: 18px 0 5px;
+}
 
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
+h2 {
+  font-size: 29px;
+  font-weight: normal;
+}
 
-      50% {
-        transform: translateY(-10px);
-      }
-    }
+.subtitle {
+  font-size: 17px;
+  line-height: 1.8;
+  opacity: 0.8;
+}
 
-    .gift-box {
-      position: absolute;
-      width: 120px;
-      height: 85px;
-      background: #c98eaa;
-      bottom: 0;
-      left: 15px;
-      border-radius: 6px;
-    }
+.message {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #f8eaf0;
+}
 
-    .gift-lid {
-      position: absolute;
-      width: 135px;
-      height: 25px;
-      background: #e4b1c8;
-      left: 7px;
-      top: 30px;
-      border-radius: 6px;
-      transition: 0.6s;
-    }
+/* ---------- CARD ---------- */
 
-    .ribbon-v {
-      position: absolute;
-      width: 18px;
-      height: 85px;
-      background: #f6d9e7;
-      left: 51px;
-      bottom: 0;
-    }
+.card {
+  width: 100%;
+  padding: 32px 24px;
+  border-radius: 25px;
 
-    .ribbon-h {
-      position: absolute;
-      width: 135px;
-      height: 12px;
-      background: #f6d9e7;
-      left: 7px;
-      top: 36px;
-    }
+  background: rgba(255,255,255,0.07);
 
-    .bow {
-      position: absolute;
-      width: 40px;
-      height: 25px;
-      border: 7px solid #f6d9e7;
-      border-radius: 50%;
-      top: 5px;
-      left: 35px;
-      transform: rotate(-20deg);
-    }
+  border: 1px solid rgba(255,255,255,0.15);
 
-    .bow.right {
-      left: 70px;
-      transform: rotate(20deg);
-    }
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.35);
 
-    .gift.opened .gift-lid {
-      transform: translateY(-60px) rotate(-8deg);
-      opacity: 0;
-    }
+  backdrop-filter: blur(10px);
+}
 
-    .gift.opened {
-      animation: none;
-    }
+/* ---------- GIFT ---------- */
 
-    /* Message cards */
+.gift {
+  position: relative;
+  width: 160px;
+  height: 145px;
+  margin: 35px auto 10px;
+  cursor: pointer;
+  animation: bounce 2s infinite ease-in-out;
+}
 
-    .card {
-      width: 100%;
-      padding: 35px 25px;
-      border-radius: 25px;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-      backdrop-filter: blur(10px);
-    }
+@keyframes bounce {
+  0%,100% {
+    transform: translateY(0);
+  }
 
-    .message {
-      font-size: 17px;
-      line-height: 1.9;
-      color: #f7eaf0;
-    }
+  50% {
+    transform: translateY(-10px);
+  }
+}
 
-    .photo {
-      width: 100%;
-      max-height: 350px;
-      object-fit: cover;
-      border-radius: 18px;
-      margin-bottom: 25px;
-      display: none;
-    }
+.gift-box {
+  position: absolute;
+  width: 125px;
+  height: 90px;
+  background: #c98eaa;
+  left: 18px;
+  bottom: 0;
+  border-radius: 6px;
+}
 
-    .mystery {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
+.gift-lid {
+  position: absolute;
+  width: 140px;
+  height: 27px;
+  background: #e5b2ca;
+  left: 10px;
+  top: 28px;
+  border-radius: 6px;
+  transition: 0.7s;
+}
 
-    .small-note {
-      font-size: 13px;
-      opacity: 0.55;
-      margin-top: 15px;
-    }
+.ribbon-v {
+  position: absolute;
+  width: 18px;
+  height: 90px;
+  background: #f8dce9;
+  left: 54px;
+  bottom: 0;
+}
 
-    .heart {
-      font-size: 30px;
-      margin-top: 25px;
-      opacity: 0.8;
-    }
-  </style>
+.ribbon-h {
+  position: absolute;
+  width: 140px;
+  height: 12px;
+  background: #f8dce9;
+  left: 10px;
+  top: 36px;
+}
+
+.bow {
+  position: absolute;
+  width: 42px;
+  height: 26px;
+  border: 7px solid #f8dce9;
+  border-radius: 50%;
+  top: 3px;
+  left: 38px;
+  transform: rotate(-20deg);
+}
+
+.bow.right {
+  left: 75px;
+  transform: rotate(20deg);
+}
+
+.gift.opened .gift-lid {
+  transform: translateY(-65px) rotate(-8deg);
+  opacity: 0;
+}
+
+/* ---------- BUTTONS ---------- */
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+.open-btn,
+.next-btn,
+.music-btn {
+  margin-top: 28px;
+  padding: 13px 28px;
+  border-radius: 30px;
+  background: #f4d8e6;
+  color: #251521;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.open-btn:hover,
+.next-btn:hover,
+.music-btn:hover {
+  transform: scale(1.06);
+}
+
+/* ---------- PHOTOS ---------- */
+
+.photo {
+  width: 100%;
+  max-height: 430px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin: 20px 0 10px;
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.35);
+
+  animation: photoAppear 1s ease;
+}
+
+@keyframes photoAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- FINAL ---------- */
+
+.mystery {
+  font-size: 45px;
+}
+
+.final-heart {
+  font-size: 35px;
+  margin-top: 25px;
+  opacity: 0.8;
+}
+
+.small-note {
+  font-size: 13px;
+  opacity: 0.55;
+  margin-top: 15px;
+}
+</style>
 </head>
+
 
 <body>
 
-  <!-- Stars -->
-  <span class="star" style="left:8%;top:12%;">✦</span>
-  <span class="star" style="left:85%;top:15%;">✧</span>
-  <span class="star" style="left:20%;top:75%;">✦</span>
-  <span class="star" style="left:90%;top:65%;">✧</span>
-  <span class="star" style="left:55%;top:25%;">✦</span>
-  <span class="star" style="left:70%;top:82%;">✧</span>
+<!-- STARS -->
 
-  <main class="page">
+<span class="star" style="left:8%;top:12%;">✦</span>
+<span class="star" style="left:85%;top:15%;">✧</span>
+<span class="star" style="left:20%;top:75%;">✦</span>
+<span class="star" style="left:90%;top:65%;">✧</span>
+<span class="star" style="left:55%;top:25%;">✦</span>
+<span class="star" style="left:70%;top:82%;">✧</span>
 
-    <!-- SCREEN 1 -->
 
-    <section class="screen active" id="screen1">
+<main class="page">
 
-      <div class="tiny">A little something for you</div>
 
-      <h1>21</h1>
+<!-- SCREEN 1 : OPENING -->
 
-      <p class="subtitle">
-        There's a little birthday surprise waiting here.
-        <br>
-        Don't overthink it. Just open it. 🎁
-      </p>
+<section class="screen active" id="screen1">
 
-      <div class="gift" id="gift" onclick="openGift()">
+<div class="tiny">
+A little something for you
+</div>
 
-        <div class="bow"></div>
-        <div class="bow right"></div>
+<h1>21</h1>
 
-        <div class="gift-lid"></div>
+<p class="subtitle">
+There's a little birthday surprise waiting here.
+<br>
+Don't overthink it. Just open it. 🎁
+</p>
 
-        <div class="gift-box">
-          <div class="ribbon-v"></div>
-        </div>
 
-        <div class="ribbon-h"></div>
+<div class="gift" id="gift" onclick="openGift()">
 
-      </div>
+<div class="bow"></div>
+<div class="bow right"></div>
 
-      <button class="open-btn" onclick="openGift()">
-        Open the gift 🎁
-      </button>
+<div class="gift-lid"></div>
 
-    </section>
+<div class="gift-box">
+<div class="ribbon-v"></div>
+</div>
 
+<div class="ribbon-h"></div>
 
-    <!-- SCREEN 2 -->
+</div>
 
-    <section class="screen" id="screen2">
 
-      <div class="card">
+<button class="open-btn" onclick="openGift()">
+Open the gift 🎁
+</button>
 
-        <div class="tiny">First little note</div>
+</section>
 
-        <h2>Happy 21st Birthday, Akkshay! 🎂</h2>
 
-        <div class="message">
 
-          <p>
-            You made it to 21. :)
-          </p>
+<!-- SCREEN 2 : BIRTHDAY -->
 
-          <p>
-            I hope this year brings you plenty of
-            good moments, good people,
-            and memories worth keeping.
-          </p>
+<section class="screen" id="screen2">
 
-          <p>
-            Have a really wonderful birthday.
-            You deserve a good one. ✨
-          </p>
+<div class="card">
 
-        </div>
+<div class="tiny">
+First little note
+</div>
 
-      </div>
+<h2>
+Happy 21st Birthday, Akkshay! 🎂
+</h2>
 
-      <button class="next-btn" onclick="nextScreen(3)">
-        There's more →
-      </button>
+<div class="message">
 
-    </section>
+<p>
+You made it to 21. :)
+</p>
 
+<p>
+I hope this year brings you plenty of
+good moments, good people,
+and memories worth keeping.
+</p>
 
-    <!-- SCREEN 3 -->
+<p>
+Have a really wonderful birthday.
+✨
+</p>
 
-    <section class="screen" id="screen3">
+</div>
 
-      <div class="card">
+</div>
 
-        <div class="tiny">A little wish</div>
 
-        <h2>For this new chapter ✨</h2>
+<button class="next-btn" onclick="nextScreen(3)">
+Open the next one →
+</button>
 
-        <div class="message">
+</section>
 
-          <p>
-            I hope 21 is kind to you.
-          </p>
 
-          <p>
-            More reasons to smile,
-            more unexpected good days,
-            and a lot of moments
-            you'll look back on happily.
-          </p>
 
-          <p>
-            That's all this little gift is meant to say.
-          </p>
+<!-- SCREEN 3 : PHOTO 1 -->
 
-        </div>
+<section class="screen" id="screen3">
 
-      </div>
+<div class="card">
 
-      <button class="next-btn" onclick="nextScreen(4)">
-        One last thing →
-      </button>
+<div class="tiny">
+A little memory
+</div>
 
-    </section>
+<img
+src="Snapchat-1456545909.jpg"
+class="photo"
+alt="A memory">
 
+<h2>
+A moment worth keeping ✨
+</h2>
 
-    <!-- SCREEN 4 -->
+<div class="message">
 
-    <section class="screen" id="screen4">
+<p>
+Some moments are simple,
+but they still become memories.
+</p>
 
-      <div class="card">
+</div>
 
-        <div class="mystery">👀</div>
+</div>
 
-        <div class="tiny">One question</div>
 
-        <h2>Who's this from?</h2>
+<button class="next-btn" onclick="nextScreen(4)">
+Next memory →
+</button>
 
-        <div class="message">
+</section>
 
-          <p>
-            Hmm...
-          </p>
 
-          <p>
-            Let's leave that part as a mystery for now. :)
-          </p>
 
-          <p>
-            No clues. No guessing.
-            Just take the birthday wish.
-          </p>
+<!-- SCREEN 4 : PHOTO 2 -->
 
-        </div>
+<section class="screen" id="screen4">
 
-      </div>
+<div class="card">
 
-      <button class="next-btn" onclick="nextScreen(5)">
-        There's something to listen to 🎵
-      </button>
+<div class="tiny">
+Another little memory
+</div>
 
-    </section>
+<img
+src="Snapchat-674437124.jpg"
+class="photo"
+alt="A memory">
 
+<div class="message">
 
-    <!-- SCREEN 5 -->
+<p>
+Here's another one
+for your little birthday collection. :)
+</p>
 
-    <section class="screen" id="screen5">
+</div>
 
-      <div class="card">
+</div>
 
-        <div class="tiny">For the birthday mood</div>
 
-        <h2>One little song 🎵</h2>
+<button class="next-btn" onclick="nextScreen(5)">
+One more →
+</button>
 
-        <p class="subtitle">
-          Press play when you're ready.
-        </p>
+</section>
 
-        <!--
-          Upload your legally obtained audio file
-          to this repository and name it:
 
-          enchanted.mp3
-        -->
 
-        <audio id="song" loop>
-          <source src="enchanted.mp3" type="audio/mpeg">
-        </audio>
+<!-- SCREEN 5 : PHOTO 3 -->
 
-        <button class="music-btn" onclick="toggleMusic()">
-          ▶ Play
-        </button>
+<section class="screen" id="screen5">
 
-        <p class="small-note">
-          A little music for your 21st.
-        </p>
+<div class="card">
 
-      </div>
+<div class="tiny">
+One last memory
+</div>
 
-      <button class="next-btn" onclick="nextScreen(6)">
-        Final note →
-      </button>
+<img
+src="Snapchat-941585431.jpg"
+class="photo"
+alt="A memory">
 
-    </section>
+<div class="message">
 
+<p>
+And one more,
+because one wasn't enough. ✨
+</p>
 
-    <!-- SCREEN 6 -->
+</div>
 
-    <section class="screen" id="screen6">
+</div>
 
-      <div class="card">
 
-        <div class="tiny">That's all</div>
+<button class="next-btn" onclick="nextScreen(6)">
+Continue →
+</button>
 
-        <h2>Happy 21st once again 🤍</h2>
+</section>
 
-        <div class="message">
 
-          <p>
-            No expectations.
-          </p>
 
-          <p>
-            No need to figure anything out.
-          </p>
+<!-- SCREEN 6 : WISH -->
 
-          <p>
-            Just a small birthday surprise
-            from someone who wishes you well.
-          </p>
+<section class="screen" id="screen6">
 
-        </div>
+<div class="card">
 
-        <div class="heart">♡</div>
+<div class="tiny">
+A little wish
+</div>
 
-        <p class="small-note">
-          — Anonymous
-        </p>
+<h2>
+For this new chapter ✨
+</h2>
 
-      </div>
+<div class="message">
 
-    </section>
+<p>
+I hope 21 is kind to you.
+</p>
 
-  </main>
+<p>
+More reasons to smile,
+more unexpected good days,
+and lots of moments
+you'll look back on happily.
+</p>
 
+<p>
+That's all this little gift is meant to say.
+</p>
 
-  <script>
+</div>
 
-    function openGift() {
+</div>
 
-      const gift = document.getElementById("gift");
 
-      gift.classList.add("opened");
+<button class="next-btn" onclick="nextScreen(7)">
+One last thing →
+</button>
 
-      setTimeout(function() {
-        nextScreen(2);
-      }, 700);
+</section>
 
-    }
 
 
-    function nextScreen(number) {
+<!-- SCREEN 7 : ANONYMOUS -->
 
-      const screens = document.querySelectorAll(".screen");
+<section class="screen" id="screen7">
 
-      screens.forEach(function(screen) {
-        screen.classList.remove("active");
-      });
+<div class="card">
 
-      document.getElementById("screen" + number)
-        .classList.add("active");
+<div class="mystery">
+👀
+</div>
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+<div class="tiny">
+One question
+</div>
 
-    }
+<h2>
+Who's this from?
+</h2>
 
+<div class="message">
 
-    function toggleMusic() {
+<p>
+Hmm...
+</p>
 
-      const song = document.getElementById("song");
-      const button = document.querySelector(".music-btn");
+<p>
+Let's leave that part
+as a mystery for now. :)
+</p>
 
-      if (song.paused) {
+<p>
+No clues. No guessing.
+<br>
+Just take the birthday wish.
+</p>
 
-        song.play();
+</div>
 
-        button.innerHTML = "⏸ Pause";
+</div>
 
-      } else {
 
-        song.pause();
+<button class="next-btn" onclick="nextScreen(8)">
+There's something to listen to 🎵
+</button>
 
-        button.innerHTML = "▶ Play";
+</section>
 
-      }
 
-    }
 
-  </script>
+<!-- SCREEN 8 : MUSIC -->
+
+<section class="screen" id="screen8">
+
+<div class="card">
+
+<div class="tiny">
+For the birthday mood
+</div>
+
+<h2>
+One little song 🎵
+</h2>
+
+<p class="subtitle">
+Press play when you're ready.
+</p>
+
+
+<audio id="song">
+
+<source
+src="Taylor Swift - Enchanted.mp3"
+type="audio/mpeg">
+
+</audio>
+
+
+<button class="music-btn" onclick="toggleMusic()">
+▶ Play
+</button>
+
+
+<p class="small-note">
+A little music for your 21st.
+</p>
+
+</div>
+
+
+<button class="next-btn" onclick="nextScreen(9)">
+Final note →
+</button>
+
+</section>
+
+
+
+<!-- SCREEN 9 : END -->
+
+<section class="screen" id="screen9">
+
+<div class="card">
+
+<div class="tiny">
+That's all
+</div>
+
+<h2>
+Happy 21st once again 🤍
+</h2>
+
+<div class="message">
+
+<p>
+No expectations.
+</p>
+
+<p>
+No need to figure anything out.
+</p>
+
+<p>
+Just a small birthday surprise
+from someone who wishes you well.
+</p>
+
+</div>
+
+<div class="final-heart">
+♡
+</div>
+
+<p class="small-note">
+— Anonymous
+</p>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+/* ---------- GIFT ---------- */
+
+function openGift() {
+
+const gift = document.getElementById("gift");
+
+gift.classList.add("opened");
+
+startHearts();
+
+setTimeout(function() {
+nextScreen(2);
+}, 700);
+
+}
+
+
+
+/* ---------- SCREEN CHANGES ---------- */
+
+function nextScreen(number) {
+
+const screens = document.querySelectorAll(".screen");
+
+screens.forEach(function(screen) {
+screen.classList.remove("active");
+});
+
+document
+.getElementById("screen" + number)
+.classList.add("active");
+
+window.scrollTo({
+top: 0,
+behavior: "smooth"
+});
+
+startHearts();
+
+}
+
+
+
+/* ---------- FLYING HEARTS ---------- */
+
+function startHearts() {
+
+for (let i = 0; i < 7; i++) {
+
+setTimeout(function() {
+
+const heart = document.createElement("div");
+
+heart.className = "heart";
+
+heart.innerHTML =
+["♡","♥","♡","♥"][Math.floor(Math.random() * 4)];
+
+heart.style.left =
+Math.random() * 100 + "vw";
+
+heart.style.animationDuration =
+(4 + Math.random() * 3) + "s";
+
+heart.style.fontSize =
+(14 + Math.random() * 12) + "px";
+
+document.body.appendChild(heart);
+
+setTimeout(function() {
+heart.remove();
+}, 7000);
+
+}, i * 180);
+
+}
+
+}
+
+
+
+/* ---------- MUSIC ---------- */
+
+function toggleMusic() {
+
+const song = document.getElementById("song");
+
+const button =
+document.querySelector(".music-btn");
+
+
+if (song.paused) {
+
+/*
+109 seconds = 1 minute 49 seconds
+*/
+
+song.currentTime = 109;
+
+song.play();
+
+button.innerHTML = "⏸ Pause";
+
+} else {
+
+song.pause();
+
+button.innerHTML = "▶ Play";
+
+}
+
+}
+
+</script>
 
 </body>
   </html>
+
+    
+      
+  
+
+
+                                            
