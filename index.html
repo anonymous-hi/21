@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>A Little Birthday Surprise 🎁</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top, #35213d 0%, #17121d 45%, #0b0910 100%);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Floating stars */
+    .star {
+      position: fixed;
+      color: #fff;
+      opacity: 0.6;
+      pointer-events: none;
+      animation: twinkle 3s infinite ease-in-out;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 650px;
+      margin: auto;
+      padding: 60px 22px;
+    }
+
+    .screen {
+      display: none;
+      min-height: 75vh;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: fadeIn 0.8s ease;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tiny {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    h1 {
+      font-size: clamp(42px, 12vw, 75px);
+      font-weight: normal;
+      margin: 20px 0 5px;
+    }
+
+    h2 {
+      font-size: 30px;
+      font-weight: normal;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      line-height: 1.8;
+      opacity: 0.8;
+      max-width: 480px;
+    }
+
+    /* Buttons */
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+    }
+
+    .open-btn,
+    .next-btn,
+    .music-btn {
+      margin-top: 30px;
+      padding: 13px 28px;
+      border-radius: 30px;
+      background: #f3d6e4;
+      color: #241522;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .open-btn:hover,
+    .next-btn:hover,
+    .music-btn:hover {
+      transform: scale(1.06);
+    }
+
+    /* Gift */
+
+    .gift {
+      position: relative;
+      width: 150px;
+      height: 130px;
+      margin: 35px auto 10px;
+      cursor: pointer;
+      animation: bounce 2s infinite ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .gift-box {
+      position: absolute;
+      width: 120px;
+      height: 85px;
+      background: #c98eaa;
+      bottom: 0;
+      left: 15px;
+      border-radius: 6px;
+    }
+
+    .gift-lid {
+      position: absolute;
+      width: 135px;
+      height: 25px;
+      background: #e4b1c8;
+      left: 7px;
+      top: 30px;
+      border-radius: 6px;
+      transition: 0.6s;
+    }
+
+    .ribbon-v {
+      position: absolute;
+      width: 18px;
+      height: 85px;
+      background: #f6d9e7;
+      left: 51px;
+      bottom: 0;
+    }
+
+    .ribbon-h {
+      position: absolute;
+      width: 135px;
+      height: 12px;
+      background: #f6d9e7;
+      left: 7px;
+      top: 36px;
+    }
+
+    .bow {
+      position: absolute;
+      width: 40px;
+      height: 25px;
+      border: 7px solid #f6d9e7;
+      border-radius: 50%;
+      top: 5px;
+      left: 35px;
+      transform: rotate(-20deg);
+    }
+
+    .bow.right {
+      left: 70px;
+      transform: rotate(20deg);
+    }
+
+    .gift.opened .gift-lid {
+      transform: translateY(-60px) rotate(-8deg);
+      opacity: 0;
+    }
+
+    .gift.opened {
+      animation: none;
+    }
+
+    /* Message cards */
+
+    .card {
+      width: 100%;
+      padding: 35px 25px;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+    }
+
+    .message {
+      font-size: 17px;
+      line-height: 1.9;
+      color: #f7eaf0;
+    }
+
+    .photo {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      border-radius: 18px;
+      margin-bottom: 25px;
+      display: none;
+    }
+
+    .mystery {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .small-note {
+      font-size: 13px;
+      opacity: 0.55;
+      margin-top: 15px;
+    }
+
+    .heart {
+      font-size: 30px;
+      margin-top: 25px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Stars -->
+  <span class="star" style="left:8%;top:12%;">✦</span>
+  <span class="star" style="left:85%;top:15%;">✧</span>
+  <span class="star" style="left:20%;top:75%;">✦</span>
+  <span class="star" style="left:90%;top:65%;">✧</span>
+  <span class="star" style="left:55%;top:25%;">✦</span>
+  <span class="star" style="left:70%;top:82%;">✧</span>
+
+  <main class="page">
+
+    <!-- SCREEN 1 -->
+
+    <section class="screen active" id="screen1">
+
+      <div class="tiny">A little something for you</div>
+
+      <h1>21</h1>
+
+      <p class="subtitle">
+        There's a little birthday surprise waiting here.
+        <br>
+        Don't overthink it. Just open it. 🎁
+      </p>
+
+      <div class="gift" id="gift" onclick="openGift()">
+
+        <div class="bow"></div>
+        <div class="bow right"></div>
+
+        <div class="gift-lid"></div>
+
+        <div class="gift-box">
+          <div class="ribbon-v"></div>
+        </div>
+
+        <div class="ribbon-h"></div>
+
+      </div>
+
+      <button class="open-btn" onclick="openGift()">
+        Open the gift 🎁
+      </button>
+
+    </section>
+
+
+    <!-- SCREEN 2 -->
+
+    <section class="screen" id="screen2">
+
+      <div class="card">
+
+        <div class="tiny">First little note</div>
+
+        <h2>Happy 21st Birthday, Akkshay! 🎂</h2>
+
+        <div class="message">
+
+          <p>
+            You made it to 21. :)
+          </p>
+
+          <p>
+            I hope this year brings you plenty of
+            good moments, good people,
+            and memories worth keeping.
+          </p>
+
+          <p>
+            Have a really wonderful birthday.
+            You deserve a good one. ✨
+          </p>
+
+        </div>
+
+      </div>
+
+      <button class="next-btn" onclick="nextScreen(3)">
+        There's more →
+      </button>
+
+    </section>
+
+
+    <!-- SCREEN 3 -->
+
+    <section class="screen" id="screen3">
+
+      <div class="card">
+
+        <div class="tiny">A little wish</div>
+
+        <h2>For this new chapter ✨</h2>
+
+        <div class="message">
+
+          <p>
+            I hope 21 is kind to you.
+          </p>
+
+          <p>
+            More reasons to smile,
+            more unexpected good days,
+            and a lot of moments
+            you'll look back on happily.
+          </p>
+
+          <p>
+            That's all this little gift is meant to say.
+          </p>
+
+        </div>
+
+      </div>
+
+      <button class="next-btn" onclick="nextScreen(4)">
+        One last thing →
+      </button>
+
+    </section>
+
+
+    <!-- SCREEN 4 -->
+
+    <section class="screen" id="screen4">
+
+      <div class="card">
+
+        <div class="mystery">👀</div>
+
+        <div class="tiny">One question</div>
+
+        <h2>Who's this from?</h2>
+
+        <div class="message">
+
+          <p>
+            Hmm...
+          </p>
+
+          <p>
+            Let's leave that part as a mystery for now. :)
+          </p>
+
+          <p>
+            No clues. No guessing.
+            Just take the birthday wish.
+          </p>
+
+        </div>
+
+      </div>
+
+      <button class="next-btn" onclick="nextScreen(5)">
+        There's something to listen to 🎵
+      </button>
+
+    </section>
+
+
+    <!-- SCREEN 5 -->
+
+    <section class="screen" id="screen5">
+
+      <div class="card">
+
+        <div class="tiny">For the birthday mood</div>
+
+        <h2>One little song 🎵</h2>
+
+        <p class="subtitle">
+          Press play when you're ready.
+        </p>
+
+        <!--
+          Upload your legally obtained audio file
+          to this repository and name it:
+
+          enchanted.mp3
+        -->
+
+        <audio id="song" loop>
+          <source src="enchanted.mp3" type="audio/mpeg">
+        </audio>
+
+        <button class="music-btn" onclick="toggleMusic()">
+          ▶ Play
+        </button>
+
+        <p class="small-note">
+          A little music for your 21st.
+        </p>
+
+      </div>
+
+      <button class="next-btn" onclick="nextScreen(6)">
+        Final note →
+      </button>
+
+    </section>
+
+
+    <!-- SCREEN 6 -->
+
+    <section class="screen" id="screen6">
+
+      <div class="card">
+
+        <div class="tiny">That's all</div>
+
+        <h2>Happy 21st once again 🤍</h2>
+
+        <div class="message">
+
+          <p>
+            No expectations.
+          </p>
+
+          <p>
+            No need to figure anything out.
+          </p>
+
+          <p>
+            Just a small birthday surprise
+            from someone who wishes you well.
+          </p>
+
+        </div>
+
+        <div class="heart">♡</div>
+
+        <p class="small-note">
+          — Anonymous
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    function openGift() {
+
+      const gift = document.getElementById("gift");
+
+      gift.classList.add("opened");
+
+      setTimeout(function() {
+        nextScreen(2);
+      }, 700);
+
+    }
+
+
+    function nextScreen(number) {
+
+      const screens = document.querySelectorAll(".screen");
+
+      screens.forEach(function(screen) {
+        screen.classList.remove("active");
+      });
+
+      document.getElementById("screen" + number)
+        .classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    function toggleMusic() {
+
+      const song = document.getElementById("song");
+      const button = document.querySelector(".music-btn");
+
+      if (song.paused) {
+
+        song.play();
+
+        button.innerHTML = "⏸ Pause";
+
+      } else {
+
+        song.pause();
+
+        button.innerHTML = "▶ Play";
+
+      }
+
+    }
+
+  </script>
+
+</body>
+  </html>
