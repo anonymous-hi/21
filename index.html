@@ -7,7 +7,6 @@
 <title>A Little Something</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -17,12 +16,12 @@ body {
     min-height: 100vh;
     background:
         radial-gradient(circle at top, #33243b, #17121c 55%, #09070d);
-    color: #fff;
+    color: white;
     font-family: Georgia, "Times New Roman", serif;
     overflow-x: hidden;
 }
 
-/* ---------------- STARS ---------------- */
+/* STARS */
 
 .star {
     position: fixed;
@@ -34,7 +33,6 @@ body {
 }
 
 @keyframes twinkle {
-
     0%, 100% {
         opacity: 0.2;
         transform: scale(0.8);
@@ -46,8 +44,7 @@ body {
     }
 }
 
-
-/* ---------------- FLYING HEARTS ---------------- */
+/* FLYING HEARTS */
 
 .heart {
     position: fixed;
@@ -59,7 +56,6 @@ body {
 }
 
 @keyframes floatHeart {
-
     0% {
         transform: translateY(0) translateX(0) scale(0.6);
         opacity: 0;
@@ -78,8 +74,7 @@ body {
     }
 }
 
-
-/* ---------------- MAIN ---------------- */
+/* MAIN */
 
 .container {
     width: 100%;
@@ -105,7 +100,6 @@ body {
 }
 
 @keyframes fadeIn {
-
     from {
         opacity: 0;
         transform: translateY(18px);
@@ -125,7 +119,7 @@ body {
 }
 
 h1 {
-    font-size: 70px;
+    font-size: clamp(60px, 17vw, 90px);
     font-weight: normal;
     margin: 20px 0 5px;
 }
@@ -145,27 +139,19 @@ p {
     font-size: 16px;
 }
 
-
-/* ---------------- CARD ---------------- */
+/* CARD */
 
 .card {
     width: 100%;
     padding: 30px 23px;
-
     border-radius: 25px;
-
     background: rgba(255,255,255,0.065);
-
     border: 1px solid rgba(255,255,255,0.13);
-
-    box-shadow:
-        0 25px 70px rgba(0,0,0,0.4);
-
+    box-shadow: 0 25px 70px rgba(0,0,0,0.4);
     backdrop-filter: blur(12px);
 }
 
-
-/* ---------------- GIFT ---------------- */
+/* GIFT */
 
 .gift-area {
     margin-top: 35px;
@@ -181,7 +167,6 @@ p {
 }
 
 @keyframes giftFloat {
-
     0%, 100% {
         transform: translateY(0);
     }
@@ -210,6 +195,7 @@ p {
     background: #e0acc4;
     border-radius: 6px;
     transition: 0.8s;
+    z-index: 3;
 }
 
 .ribbonVertical {
@@ -228,6 +214,7 @@ p {
     left: 10px;
     top: 36px;
     background: #f6dce8;
+    z-index: 4;
 }
 
 .bow {
@@ -239,6 +226,7 @@ p {
     border: 7px solid #f6dce8;
     border-radius: 50%;
     transform: rotate(-20deg);
+    z-index: 5;
 }
 
 .bow.right {
@@ -247,14 +235,17 @@ p {
 }
 
 .gift.open .lid {
-    transform:
-        translateY(-70px)
-        rotate(-10deg);
+    transform: translateY(-70px) rotate(-10deg);
     opacity: 0;
 }
 
+.gift.open .bow,
+.gift.open .ribbonHorizontal {
+    opacity: 0;
+    transition: 0.5s;
+}
 
-/* ---------------- BUTTON ---------------- */
+/* BUTTON */
 
 button {
     border: none;
@@ -266,12 +257,9 @@ button {
     margin-top: 28px;
     padding: 13px 28px;
     border-radius: 30px;
-
     background: #f2d7e4;
     color: #24151f;
-
     font-size: 15px;
-
     transition: 0.3s;
 }
 
@@ -279,29 +267,21 @@ button {
     transform: scale(1.06);
 }
 
-
-/* ---------------- PHOTOS ---------------- */
+/* PHOTOS */
 
 .photo-frame {
     margin-top: 20px;
     padding: 9px;
-
     background: rgba(255,255,255,0.12);
-
     border-radius: 20px;
-
-    box-shadow:
-        0 20px 45px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.4);
 }
 
 .photo {
     display: block;
-
     width: 100%;
     max-height: 430px;
-
     object-fit: contain;
-
     border-radius: 14px;
 }
 
@@ -311,8 +291,13 @@ button {
     opacity: 0.78;
 }
 
+/* POEM */
 
-/* ---------------- END ---------------- */
+.poem {
+    font-size: 17px;
+    line-height: 2;
+    opacity: 0.88;
+}
 
 .final-symbol {
     font-size: 38px;
@@ -325,15 +310,13 @@ button {
     opacity: 0.55;
     font-size: 14px;
 }
-
 </style>
 </head>
 
 
 <body>
 
-
-<!-- BACKGROUND STARS -->
+<!-- STARS -->
 
 <span class="star" style="left:8%;top:12%;">✦</span>
 <span class="star" style="left:85%;top:16%;">✧</span>
@@ -346,7 +329,7 @@ button {
 <div class="container">
 
 
-<!-- ================= SCREEN 1 ================= -->
+<!-- SCREEN 1 -->
 
 <section class="screen active" id="screen1">
 
@@ -362,21 +345,17 @@ button {
         Open it when you're ready.
     </p>
 
-
     <div class="gift-area">
 
         <div class="gift" id="gift" onclick="openGift()">
 
             <div class="bow"></div>
-
             <div class="bow right"></div>
 
             <div class="lid"></div>
 
             <div class="box">
-
                 <div class="ribbonVertical"></div>
-
             </div>
 
             <div class="ribbonHorizontal"></div>
@@ -385,7 +364,6 @@ button {
 
     </div>
 
-
     <button class="next" onclick="openGift()">
         Open the gift 🎁
     </button>
@@ -393,42 +371,46 @@ button {
 </section>
 
 
-
-<!-- ================= SCREEN 2 ================= -->
+<!-- SCREEN 2 -->
 
 <section class="screen" id="screen2">
 
     <div class="card">
 
         <div class="small-title">
-            before we continue
+            just a little something
         </div>
 
         <h2>
-            Nothing complicated.
+            Before we continue...
         </h2>
 
         <p class="soft">
-            Just a few things that made
-            their way into this little surprise.
+            No big speech.
+            <br>
+            No dramatic explanation.
         </p>
 
         <p class="soft">
-            That's it. :)
+            Just a few things that
+            seemed worth putting together.
+        </p>
+
+        <p class="soft">
+            And yes...
+            you actually have to keep clicking. 😂
         </p>
 
     </div>
 
-
     <button class="next" onclick="nextScreen(3)">
-        Continue →
+        Okay, continue →
     </button>
 
 </section>
 
 
-
-<!-- ================= PHOTO 1 ================= -->
+<!-- PHOTO 1 -->
 
 <section class="screen" id="screen3">
 
@@ -437,7 +419,6 @@ button {
         <div class="small-title">
             from the archives
         </div>
-
 
         <div class="photo-frame">
 
@@ -448,13 +429,11 @@ button {
 
         </div>
 
-
         <p class="photo-caption">
-            The tiny human era.
+            The tiny human era. 😂
         </p>
 
     </div>
-
 
     <button class="next" onclick="nextScreen(4)">
         Another one →
@@ -463,8 +442,7 @@ button {
 </section>
 
 
-
-<!-- ================= PHOTO 2 ================= -->
+<!-- PHOTO 2 -->
 
 <section class="screen" id="screen4">
 
@@ -474,23 +452,20 @@ button {
             another page
         </div>
 
-
         <div class="photo-frame">
 
             <img
-                src="Snapchat-1400773371(1).jpg"
+                src="Snapchat-1153779075.jpg"
                 class="photo"
                 alt="Memory">
 
         </div>
 
-
         <p class="photo-caption">
-            Okay... this one had to be included too. 😂
+            Okay... this one had to be here too.
         </p>
 
     </div>
-
 
     <button class="next" onclick="nextScreen(5)">
         Keep going →
@@ -499,8 +474,7 @@ button {
 </section>
 
 
-
-<!-- ================= PHOTO 3 ================= -->
+<!-- PHOTO 3 -->
 
 <section class="screen" id="screen5">
 
@@ -510,23 +484,20 @@ button {
             somewhere along the way
         </div>
 
-
         <div class="photo-frame">
 
             <img
-                src="Snapchat-1031815939(1).jpg"
+                src="Snapchat-2066498136.jpg"
                 class="photo"
                 alt="Memory">
 
         </div>
 
-
         <p class="photo-caption">
-            And then... this era.
+            And then came this era.
         </p>
 
     </div>
-
 
     <button class="next" onclick="nextScreen(6)">
         One more →
@@ -535,8 +506,7 @@ button {
 </section>
 
 
-
-<!-- ================= PHOTO 4 ================= -->
+<!-- PHOTO 4 -->
 
 <section class="screen" id="screen6">
 
@@ -545,7 +515,6 @@ button {
         <div class="small-title">
             and here we are
         </div>
-
 
         <div class="photo-frame">
 
@@ -556,54 +525,69 @@ button {
 
         </div>
 
-
         <p class="photo-caption">
             Somehow, 21 already.
         </p>
 
     </div>
 
-
     <button class="next" onclick="nextScreen(7)">
-        One last thing →
+        There's a little wish →
     </button>
 
 </section>
 
 
-
-<!-- ================= FINAL ================= -->
+<!-- FINAL POEM -->
 
 <section class="screen" id="screen7">
 
     <div class="card">
 
         <div class="small-title">
-            that's all
+            for 21
         </div>
-
 
         <h2>
-            Hope this made you smile. :)
+            For 21
         </h2>
 
+        <div class="poem">
 
-        <p class="soft">
-            No big explanation.
-            <br>
-            No hidden assignment.
-            <br>
-            Just a tiny little surprise.
-        </p>
+            <p>
+                May this year
+                <br>
+                leave little sparks in ordinary days,
+                <br>
+                bring laughter when you least expect it,
+                <br>
+                and take you to places
+                <br>
+                you haven't imagined yet.
+            </p>
 
+            <p>
+                May some moments stay longer than they should,
+                <br>
+                some memories arrive unexpectedly,
+                <br>
+                and may there always be
+                <br>
+                something good waiting around the corner.
+            </p>
 
-        <div class="final-symbol">
-            ♡
+            <p>
+                <strong>Happy 21st.</strong>
+            </p>
+
         </div>
 
+        <div class="final-symbol">
+            ✦
+        </div>
 
         <div class="signature">
-            — Anonymous
+            — someone passing by, perhaps
         </div>
 
     </div>
@@ -614,10 +598,11 @@ button {
 </div>
 
 
+<!-- BACKGROUND MUSIC -->
 
-<!-- ================= MUSIC ================= -->
-
-<audio id="backgroundMusic">
+<audio
+    id="backgroundMusic"
+    preload="auto">
 
     <source
         src="Taylor Swift - Enchanted.mp3"
@@ -626,11 +611,9 @@ button {
 </audio>
 
 
-
 <script>
 
-
-/* ================= GIFT ================= */
+/* OPEN GIFT + START MUSIC */
 
 function openGift() {
 
@@ -641,10 +624,11 @@ function openGift() {
 
 
     /*
-       Start the song at 1:49.
+       1:49 = 109 seconds.
 
-       1 minute 49 seconds
-       = 109 seconds.
+       The song starts here
+       and continues until
+       the audio file ends.
     */
 
     const music =
@@ -653,7 +637,7 @@ function openGift() {
     music.currentTime = 109;
 
     music.play().catch(function(error) {
-        console.log("Music needs user interaction.");
+        console.log("Music playback was blocked:", error);
     });
 
 
@@ -661,43 +645,33 @@ function openGift() {
 
 
     setTimeout(function() {
-
         nextScreen(2);
-
     }, 800);
 
 }
 
 
-
-/* ================= SCREEN CHANGE ================= */
+/* CHANGE SCREEN */
 
 function nextScreen(number) {
 
     const screens =
         document.querySelectorAll(".screen");
 
-
     screens.forEach(function(screen) {
-
         screen.classList.remove("active");
-
     });
 
 
     const next =
         document.getElementById("screen" + number);
 
-
     next.classList.add("active");
 
 
     window.scrollTo({
-
         top: 0,
-
         behavior: "smooth"
-
     });
 
 
@@ -706,8 +680,7 @@ function nextScreen(number) {
 }
 
 
-
-/* ================= HEARTS ================= */
+/* FLYING HEARTS */
 
 function createHearts() {
 
@@ -726,15 +699,12 @@ function createHearts() {
             const heart =
                 document.createElement("div");
 
-
             heart.className = "heart";
-
 
             heart.innerHTML =
                 symbols[
                     Math.floor(
-                        Math.random() *
-                        symbols.length
+                        Math.random() * symbols.length
                     )
                 ];
 
@@ -755,9 +725,7 @@ function createHearts() {
 
 
             setTimeout(function() {
-
                 heart.remove();
-
             }, 7000);
 
 
@@ -770,11 +738,7 @@ function createHearts() {
 </script>
 
 </body>
-</html>        
-
-
-
-
-
-
+    </html>        
+    
+                        
 
